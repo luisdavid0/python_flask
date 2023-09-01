@@ -1,5 +1,5 @@
 #Importamos flask 
-from flask import Flask
+from flask import Flask,jsonify 
 import numpy as np
 app= Flask(__name__)
 
@@ -15,7 +15,7 @@ def  HolFlask():
 
 def notas (nota1=0, nota2=0, nota3=0):
     resultado=(nota1*30)/100+(nota2*30)/100+(nota3*40)/100
-    return f"<h1> El resultado es: {resultado} </h1> <hr>"
+    return jsonify  ({"resultado": resultado})
 @app.route("/edades")
 @app.route("/edades/<int:edad>")
 
@@ -26,7 +26,7 @@ def edades (edad=0):
         r="Adulto"
     else:
         r="Adulto mayor"
-    return f"<h1> la persona es: {r} </h1> <hr>"
+    return jsonify  ({"resultado": r})
 @app.route("/arreglos")
 @app.route("/arreglos/<int:valores>/<int:colmunas>")
 @app.route("/arreglos/<int:valores>/<int:columnas>/<int:filas>")
@@ -37,7 +37,7 @@ def arreglos(valores=0, columnas=0,filas=0):
     else: 
         arreglo= np.random.randint(valores,size=(filas,columnas))
         
-    return f"<h1> El arreglo aleatorio es:{arreglo}</h1> <hr>" 
+    return jsonify  ({"arreglo":arreglo.tolist() })
 
 
 
